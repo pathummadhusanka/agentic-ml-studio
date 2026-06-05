@@ -1,7 +1,8 @@
 import streamlit as st
 from pathlib import Path
+import asyncio
 
-from app.mcp.dataset_server.tools import profile_dataset
+from app.mcp.client.dataset_client import profile_dataset_via_mcp
 
 DATASET_DIR = Path("storage/datasets")
 DATASET_DIR.mkdir(parents=True, exist_ok=True)
@@ -23,7 +24,9 @@ if uploaded_csv_file:
 
 	if st.button("Analyze Dataset"):
 
-		result = profile_dataset(str(file_path))
+		result = asyncio.run(
+			profile_dataset_via_mcp(str(file_path))
+		)
 
 		st.subheader("Dataset Profile")
 		st.json(result)

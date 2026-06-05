@@ -1,3 +1,9 @@
+- Run MCP Server: Dataset Server
+
+    ```
+    uv run -m app.mcp.dataset_server.server
+    ```
+
 - Run Streamlit
 
     ```

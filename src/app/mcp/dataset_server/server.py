@@ -8,4 +8,5 @@ def profile_dataset_tool(file_path):
 	return profile_dataset(file_path)
 
 if __name__ == "__main__":
+	print("dataset-server-mcp")
 	dataset_server_mcp.run()
