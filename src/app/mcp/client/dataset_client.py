@@ -51,3 +51,14 @@ async def get_schema(file_path):
 		{"file_path": file_path}
 	)
 
+async def detect_missing_values(file_path):
+	return await call_dataset_tool(
+		"detect_missing_values_tool",
+		{"file_path": file_path}
+	)
+
+async def detect_duplicates(file_path):
+	return await call_dataset_tool(
+		"detect_duplicates_tool",
+		{"file_path": file_path}
+	)
