@@ -50,7 +50,15 @@ if uploaded_csv_file:
             detect_duplicates(str(file_path))
         )
 
-if "profile" in st.session_state:
+if all(
+    key in st.session_state
+    for key in [
+        "profile",
+        "schema",
+        "missing_values",
+        "duplicates",
+    ]
+):
 
     profile = st.session_state["profile"]
     schema = st.session_state["schema"]
