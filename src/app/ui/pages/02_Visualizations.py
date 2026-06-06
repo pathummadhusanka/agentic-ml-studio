@@ -5,7 +5,8 @@ import streamlit as st
 
 from app.mcp.client.visualization_client import (
     create_histogram,
-    create_heatmap
+    create_heatmap,
+    create_scatter_plot
 )
 
 st.title("Visualizations")
@@ -36,6 +37,7 @@ st.info(
 st.subheader(
     "Histogram Plot"
 )
+
 selected_column = st.selectbox(
     "Select Column",
     list(schema.keys()),
@@ -76,3 +78,53 @@ st.plotly_chart(
     heatmap_fig,
     use_container_width=True
 )
+
+numeric_columns = [
+    column
+    for column, dtype in schema.items()
+    if dtype in (
+        "int64",
+        "float64",
+        "int32",
+        "float32",
+    )
+]
+
+st.subheader(
+    "Scatter Plot"
+)
+
+x_column = st.selectbox(
+    "X Axis",
+    numeric_columns,
+    index=None,
+    placeholder="Select X column",
+    key="scatter_x",
+)
+
+y_column = st.selectbox(
+    "Y Axis",
+    numeric_columns,
+    index=None,
+    placeholder="Select Y column",
+    key="scatter_y",
+)
+
+if x_column and y_column:
+
+    scatter_json = asyncio.run(
+        create_scatter_plot(
+            file_path,
+            x_column,
+            y_column,
+        )
+    )
+
+    scatter_fig = pio.from_json(
+        scatter_json
+    )
+
+    st.plotly_chart(
+        scatter_fig,
+        use_container_width=True,
+    )

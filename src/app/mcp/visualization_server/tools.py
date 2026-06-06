@@ -29,3 +29,19 @@ def create_heatmap(file_path):
     )
 
     return fig.to_json()
+
+def create_scatter_plot(
+    file_path,
+    x_column,
+    y_column,
+):
+    df = pd.read_csv(file_path)
+
+    fig = px.scatter(
+        df,
+        x=x_column,
+        y=y_column,
+        title=f"{x_column} vs {y_column}",
+    )
+
+    return fig.to_json()

@@ -56,3 +56,17 @@ async def create_heatmap(
             "file_path": file_path
         }
     )
+
+async def create_scatter_plot(
+    file_path,
+    x_column,
+    y_column,
+):
+    return await call_visualization_tool(
+        "create_scatter_plot_tool",
+        {
+            "file_path": file_path,
+            "x_column": x_column,
+            "y_column": y_column,
+        },
+    )
