@@ -7,7 +7,7 @@ from mcp.types import TextContent
 from mcp.client.stdio import stdio_client, StdioServerParameters
 
 
-async def call_dataset_tool(tool_name, arguments):
+async def call_visualization_tool(tool_name, arguments):
 	server_params = StdioServerParameters(
 		command=sys.executable,
 		args=["-m", "app.mcp.visualization_server.server"]
@@ -39,10 +39,20 @@ async def call_dataset_tool(tool_name, arguments):
 		)
 
 async def create_histogram(file_path, column):
-	return await call_dataset_tool(
+	return await call_visualization_tool(
 		"create_histogram_tool",
 		{
 			"file_path": file_path,
 			"column": column
 			}
 	)
+
+async def create_heatmap(
+    file_path: str
+):
+    return await call_visualization_tool(
+        "create_heatmap_tool",
+        {
+            "file_path": file_path
+        }
+    )

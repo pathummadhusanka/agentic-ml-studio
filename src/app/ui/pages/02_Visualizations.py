@@ -5,6 +5,7 @@ import streamlit as st
 
 from app.mcp.client.visualization_client import (
     create_histogram,
+    create_heatmap
 )
 
 st.title("Visualizations")
@@ -28,9 +29,13 @@ file_path = st.session_state["file_path"]
 schema = st.session_state["schema"]
 
 st.info(
-    f"Dataset: {st.session_state['dataset_name']}"
+    f"Dataset: {st.
+                session_state['dataset_name']}"
 )
 
+st.subheader(
+    "Histogram Plot"
+)
 selected_column = st.selectbox(
     "Select Column",
     list(schema.keys()),
@@ -53,3 +58,21 @@ if selected_column:
         fig,
         use_container_width=True
     )
+
+
+st.subheader(
+    "Correlation Heatmap"
+)
+
+heatmap_json = asyncio.run(
+    create_heatmap(file_path)
+)
+
+heatmap_fig = pio.from_json(
+    heatmap_json
+)
+
+st.plotly_chart(
+    heatmap_fig,
+    use_container_width=True
+)
