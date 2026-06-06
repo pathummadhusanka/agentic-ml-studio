@@ -1,23 +1,20 @@
 
 from contextlib import AsyncExitStack
 import json
-
+import sys
 from mcp import ClientSession
 from mcp.types import TextContent
 
 from mcp.client.stdio import stdio_client, StdioServerParameters
 
-async def profile_dataset_via_mcp(file_path):
 
-	print("profile_dataset_via_mcp")
-
+async def call_dataset_tool(tool_name, arguments):
 	server_params = StdioServerParameters(
-		command="python",
+		command=sys.executable,
 		args=["-m", "app.mcp.dataset_server.server"]
 	)
 
 	async with AsyncExitStack() as stack:
-
 		read, write = await stack.enter_async_context(
 			stdio_client(server_params)
 		)
@@ -29,8 +26,8 @@ async def profile_dataset_via_mcp(file_path):
 		await session.initialize()
 
 		result = await session.call_tool(
-			"profile_dataset_tool",
-			{"file_path": file_path}
+			tool_name,
+			arguments
 		)
 
 		content = result.content[0]
@@ -41,3 +38,16 @@ async def profile_dataset_via_mcp(file_path):
 		raise ValueError(
 			f"Unexpected response type: {type(content)}"
 		)
+
+async def profile_dataset(file_path):
+	return await call_dataset_tool(
+		"profile_dataset_tool",
+		{"file_path": file_path}
+	)
+
+async def get_schema(file_path):
+	return await call_dataset_tool(
+		"get_schema_tool",
+		{"file_path": file_path}
+	)
+
