@@ -13,7 +13,7 @@ from app.mcp.client.dataset_client import (
 DATASET_DIR = Path("storage/datasets")
 DATASET_DIR.mkdir(parents=True, exist_ok=True)
 
-st.title("Agentic ML Studio")
+st.title("Dataset")
 
 uploaded_csv_file = st.file_uploader(
     "Upload CSV file",
