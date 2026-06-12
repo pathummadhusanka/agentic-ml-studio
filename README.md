@@ -1,4 +1,4 @@
-- Run MCP Server: Dataset Server
+- Run MCP Servers
 
     ```
     uv run -m app.mcp.dataset_server.server
