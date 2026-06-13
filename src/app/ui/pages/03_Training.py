@@ -34,6 +34,8 @@ if st.button("Train Linear Regression"):
 		train_linear_regression(str(file_path), target_column)
 	)
 
+	st.session_state["metrics"] = metrics
+	st.session_state["model_path"] = metrics["model_path"]
 
 	st.metric("R2 Score", metrics["r2_score"])
 	st.metric("MAE", metrics["mae"])

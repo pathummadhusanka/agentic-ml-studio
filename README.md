@@ -4,6 +4,7 @@
     uv run -m app.mcp.dataset_server.server
     uv run -m app.mcp.visualization_server.server
     uv run -m app.mcp.training_server.server
+    uv run -m app.mcp.reporting_server.server
     ```
 
 - Run Streamlit

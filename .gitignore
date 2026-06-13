@@ -11,3 +11,4 @@ wheels/
 
 storage/datasets/*
 storage/models/*
+storage/reports/*
