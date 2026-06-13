@@ -6,6 +6,12 @@ from sklearn.metrics import (
 	mean_absolute_error,
 	root_mean_squared_error
 )
+from pathlib import Path
+import joblib
+
+MODEL_DIR = Path("storage/models")
+
+MODEL_DIR.mkdir(parents=True, exist_ok=True)
 
 def train_linear_regression(file_path, target_column):
 	df = pd.read_csv(file_path)
@@ -23,6 +29,10 @@ def train_linear_regression(file_path, target_column):
 
 	model.fit(X_train, y_train)
 
+	model_path = MODEL_DIR / "linear_regression.pkl"
+
+	joblib.dump(model, model_path)
+
 	predictions = model.predict(X_test)
 
 	r2 = r2_score(y_test, predictions)
@@ -32,5 +42,6 @@ def train_linear_regression(file_path, target_column):
 	return {
 		"r2_score": round(r2, 4),
 		"mae": round(mae, 4),
-		"rmse": round(rmse, 4)
+		"rmse": round(rmse, 4),
+		"model_path": str(model_path)
 	}

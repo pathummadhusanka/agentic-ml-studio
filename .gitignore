@@ -10,3 +10,4 @@ wheels/
 .venv
 
 storage/datasets/*
+storage/models/*

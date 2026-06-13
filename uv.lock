@@ -12,6 +12,7 @@ name = "agentic-ml-studio"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "joblib" },
     { name = "mcp" },
     { name = "ollama" },
     { name = "pandas" },
@@ -27,6 +28,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "joblib", specifier = ">=1.5.3" },
     { name = "mcp", specifier = ">=1.27.2" },
     { name = "ollama", specifier = ">=0.6.2" },
     { name = "pandas", specifier = ">=3.0.3" },

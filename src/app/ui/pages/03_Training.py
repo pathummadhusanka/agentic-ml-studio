@@ -38,3 +38,5 @@ if st.button("Train Linear Regression"):
 	st.metric("R2 Score", metrics["r2_score"])
 	st.metric("MAE", metrics["mae"])
 	st.metric("RMSE", metrics["rmse"])
+
+	st.success(f"Model saved to: {metrics["model_path"]}")
