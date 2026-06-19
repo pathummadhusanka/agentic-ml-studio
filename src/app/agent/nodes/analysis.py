@@ -21,7 +21,7 @@ def analyze_dataset(file_path: str, target_column: str = "") -> Dict[str, Any]:
     duplicates = detect_duplicates(file_path)
     
     numeric_cols: List[str] = df.select_dtypes(include=["number"]).columns.tolist()
-    categorical_cols: List[str] = df.select_dtypes(include=["object", "category", "bool"]).columns.tolist()
+    categorical_cols: List[str] = df.select_dtypes(include=["object", "string", "str", "category", "bool"]).columns.tolist()
     
     # Calculate basic numeric summary statistics
     numeric_df = df[numeric_cols] if numeric_cols else pd.DataFrame()
