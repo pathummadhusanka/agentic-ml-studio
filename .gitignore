@@ -12,3 +12,6 @@ wheels/
 storage/datasets/*
 storage/models/*
 storage/reports/*
+
+# AI agent instructions
+.ai/
